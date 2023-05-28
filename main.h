@@ -9,64 +9,33 @@
 #include <limits.h>
 #include <stdint.h>
 
-/**
- * struct flags - struct containing flags to turn on
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
- */
-
-typedef struct flags
-{
-	int plus;
-	int space;
-	int hash;
-} flags_t;
-
-/**
- * struct printHandler - struct to choose the right function
- * @c: format specifier passed to _print()
- * @f: point to the correct print function
- */
-
-typedef struct printHandler
-{
-	char c;
-	int (*f)(va_list ap, flags_t *f);
-} ph;
-
-int print_int(va_list l, flags_t *f);
-void print_number(int n);
-int print_unsigned(va_list l, flags_t *f);
-int count_digit(int i);
-
-int print_hex(va_list l, flags_t *f);
-int print_hex_big(va_list l, flags_t *f);
-int print_binary(va_list l, flags_t *f);
-int print_octal(va_list l, flags_t *f);
-
-char *convert(unsigned long int num, int base, int lowercase);
-
-int _printf(const char *format, ...);
-
-int (*get_print(char s))(va_list, flags_t *);
-
-int get_flag(char s, flags_t *f);
-
-int print_string(va_list l, flags_t *f);
-int print_char(va_list l, flags_t *f);
-
+/* Function prototypes */
 int _putchar(char c);
-int _puts(char *str);
-
-int print_rot13(va_list l, flags_t *f);
-int print_rev(va_list l, flags_t *f);
-int print_bigS(va_list l, flags_t *f);
-
-int print_address(va_list l, flags_t *f);
-
-int print_percent(va_list l, flags_t *f);
-
+int _printf(const char *format, ...);
+int handle_char(va_list args);
+int handle_string(va_list args);
+void _print_integer(long int n, int *count, char flag, int is_start);
+int handle_integer(va_list args, char flag, char length_modifier);
+int handle_binary(va_list args);
+int handle_unsigned_int(va_list args, char length);
+int print_unsigned_int(unsigned int num);
+int print_unsigned_int_l(unsigned long int num_l);
+int print_unsigned_int_h(unsigned short int num_h);
+int handle_octal(va_list args, char flag, char length);
+int print_octal(unsigned int num, char flag);
+int print_octal_h(unsigned short int num_h, char flag);
+int print_octal_l(unsigned long int num_l, char flag);
+int handle_hex_lower(va_list args, char flag, char length);
+int handle_hex_upper(va_list args, char flag, char length);
+int print_hex(unsigned int num, int upper, char flag);
+int print_hex_h(unsigned short int num, int upper, char flag);
+int print_hex_l(unsigned long int num, int upper, char flag);
+int handle_specifier(char specifier, va_list args, char flag, char length);
+int handle_specifier_ext(char specifier, va_list args, char flag, char length);
+int print_hex_char(unsigned char c, char flag);
+int handle_custom_S(va_list args);
+int handle_pointer(va_list args);
+int handle_flag_and_specifier(const char **format, va_list args, int *count);
 
 #endif
 
