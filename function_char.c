@@ -4,7 +4,7 @@
  * @args: args list
  * Return: the number of chars printed
  */
-int function_char(va_list args)
+int handle_char(va_list args)
 {
 	char c = va_arg(args, int);
 
