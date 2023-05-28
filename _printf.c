@@ -90,4 +90,3 @@ int handle_flag_and_specifier(const char **format, va_list args, int *ct)
 
 	return (0);
 }
-
